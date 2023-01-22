@@ -87,7 +87,7 @@ end;
 
 procedure TForm1.PaintBox1Click(Sender: TObject);
 begin
-  for var i := 0 to TIMES - 1 do begin
+  for var i := 0 to TIMES do begin
     FCounter := i;
     PaintBox1.Invalidate;
     Application.ProcessMessages;
