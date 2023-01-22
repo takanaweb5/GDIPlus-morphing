@@ -9,10 +9,10 @@ uses
 type
   TForm1 = class(TForm)
     PaintBox1: TPaintBox;
-    procedure PaintBox1Click(Sender: TObject);
-    procedure PaintBox1Paint(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure PaintBox1Click(Sender: TObject);
+    procedure PaintBox1Paint(Sender: TObject);
   private
     FGPBitmap: array[1..2] of TGPBitmap;
     FCounter: Integer;
