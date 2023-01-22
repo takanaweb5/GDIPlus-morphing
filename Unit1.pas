@@ -73,6 +73,8 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  //画面のちらつきを抑止する
+  Form1.DoubleBuffered := true;
   FGPBitmap[1] := TGPBitmap.Create(FILE1);
   FGPBitmap[2] := TGPBitmap.Create(FILE2);
 end;
