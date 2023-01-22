@@ -1,0 +1,31 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 495
+  ClientWidth = 699
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PaintBox1: TPaintBox
+    Left = 0
+    Top = 0
+    Width = 699
+    Height = 495
+    Align = alClient
+    OnClick = PaintBox1Click
+    OnPaint = PaintBox1Paint
+    ExplicitLeft = 304
+    ExplicitTop = 216
+    ExplicitWidth = 105
+    ExplicitHeight = 105
+  end
+end

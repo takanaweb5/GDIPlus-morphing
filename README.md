@@ -1,0 +1,2 @@
+# GDIPlus-morphing
+ GDI+でモーフィングをするサンプル
