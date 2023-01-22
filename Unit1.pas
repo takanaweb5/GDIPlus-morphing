@@ -33,46 +33,10 @@ implementation
 
 {$R *.dfm}
 
-////*****************************************************************************
-////[概要] ログファイルにログを書込む
-////[引数] 書込む文字列，ファイル名
-////[戻値] なし
-////*****************************************************************************
-//procedure OutputDebugStr(str: string; strFileName: string = '');
-//const
-//  FileName = 'Z:\Debug.log';
-//var
-//  FLog: TextFile;
-//begin
-//  if strFileName = '' then strFileName := FileName;
-//  AssignFile(FLog, strFileName);
-//  try
-//    if FileExists(strFileName) then Append(FLog)  // ファイルの末尾に追加
-//                               else Rewrite(FLog);// 新しいファイルを作成し開く
-//    Writeln(FLog, str);
-//  finally
-//    CloseFile(FLog);
-//  end;
-//end;
-//
-////*****************************************************************************
-////[概要] ログファイルにログを書込む
-////[引数] 書込む文字列，ファイル名
-////[戻値] なし
-////*****************************************************************************
-//procedure OutputDebugLog(str: string; strFileName: string = '');
-//var
-//  ST: SYSTEMTIME;
-//begin
-//  GetLocalTime(ST);
-//  str := Format('%.2d:%.2d:%.2d.%.3d',
-//         [ST.wHour, ST.wMinute, ST.wSecond, ST.wMilliseconds])
-//          + ' : '+ str;
-//  OutputDebugStr(str, strFileName);
-//end;
-
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+  PaintBox1.OnPaint := PaintBox1Paint;
+
   //画面のちらつきを抑止する
   Form1.DoubleBuffered := true;
   FGPBitmap[1] := TGPBitmap.Create(FILE1);
@@ -110,13 +74,11 @@ begin
   ia := TGPImageAttributes.Create;
 
   gcanvas := TGPGraphics.Create(PaintBox1.Canvas.Handle);
-  //gcanvas.SetCompositingQuality(CompositingQualityGammaCorrected);
 
   fillChar(cm,SizeOf(TColorMatrix),#0);
   for var i := 0 to 4 do cm[i,i] := 1.0;
 
   cm[3,3] := FCounter / TIMES;
-//  OutputDebugLog(cm[3,3].tostring);
 
   ia.SetColorMatrix(cm);
   gcanvas.DrawImage(FGPBitmap[1],

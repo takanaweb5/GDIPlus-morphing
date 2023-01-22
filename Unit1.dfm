@@ -22,7 +22,6 @@ object Form1: TForm1
     Height = 495
     Align = alClient
     OnClick = PaintBox1Click
-    OnPaint = PaintBox1Paint
     ExplicitLeft = 304
     ExplicitTop = 216
     ExplicitWidth = 105
