@@ -15,7 +15,7 @@ type
     procedure PaintBox1Paint(Sender: TObject);
   private
     FGPBitmap: array[1..2] of TGPBitmap;
-    FCounter: Integer;
+    FCount: Integer;
   public
     { Public 宣言 }
   end;
@@ -35,12 +35,11 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  PaintBox1.OnPaint := PaintBox1Paint;
-
-  //画面のちらつきを抑止する
-  Form1.DoubleBuffered := true;
   FGPBitmap[1] := TGPBitmap.Create(FILE1);
   FGPBitmap[2] := TGPBitmap.Create(FILE2);
+
+  Form1.DoubleBuffered := true; //画面のちらつきを抑止する
+  PaintBox1.OnPaint := PaintBox1Paint; //TImageとの比較用にコードで設定
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -52,9 +51,9 @@ end;
 procedure TForm1.PaintBox1Click(Sender: TObject);
 begin
   for var i := 0 to TIMES do begin
-    FCounter := i;
+    FCount := i;
     PaintBox1.Invalidate;
-    Application.ProcessMessages;
+    Application.ProcessMessages;//これがないと途中経過が視覚化されない
     Sleep(WAITTIME);
   end;
   var swap := FGPBitmap[1];
@@ -72,14 +71,12 @@ begin
   var h := FGPBitmap[1].GetHeight;
 
   ia := TGPImageAttributes.Create;
-
   gcanvas := TGPGraphics.Create(PaintBox1.Canvas.Handle);
 
   fillChar(cm,SizeOf(TColorMatrix),#0);
   for var i := 0 to 4 do cm[i,i] := 1.0;
 
-  cm[3,3] := FCounter / TIMES;
-
+  cm[3,3] := FCount / TIMES;
   ia.SetColorMatrix(cm);
   gcanvas.DrawImage(FGPBitmap[1],
                     MakeRect(0, 0, w, h),
