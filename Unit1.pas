@@ -62,6 +62,13 @@ begin
 end;
 
 procedure TForm1.PaintBox1Paint(Sender: TObject);
+const
+  CM_DEFAULT : TColorMatrix = (
+      (1, 0, 0, 0, 0),
+      (0, 1, 0, 0, 0),
+      (0, 0, 1, 0, 0),
+      (0, 0, 0, 9, 0),
+      (0, 0, 0, 0, 1));
 var
   gcanvas: TGPGraphics;
   cm: TColorMatrix;
@@ -73,8 +80,7 @@ begin
   ia := TGPImageAttributes.Create;
   gcanvas := TGPGraphics.Create(PaintBox1.Canvas.Handle);
 
-  fillChar(cm,SizeOf(TColorMatrix),#0);
-  for var i := 0 to 4 do cm[i,i] := 1.0;
+  cm := CM_DEFAULT;
 
   cm[3,3] := FCount / TIMES;
   ia.SetColorMatrix(cm);
