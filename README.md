@@ -1,5 +1,5 @@
 # GDIPlus-morphing
 
- GDI+でモーフィングをするサンプル
+ GDI+で簡易モーフィングをするサンプル
 
 TPaintBoxコントロールのOnPaintイベントで描画をするサンプル
